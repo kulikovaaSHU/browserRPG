@@ -1,0 +1,52 @@
+body {
+	text-align: center;
+}
+
+.container {
+	margin: auto;
+}
+
+.ui-button {
+	background-color: white;
+	color: black;
+	border: solid 1px black;
+	box-shadow: 1px 2px 1px grey;
+}
+
+.ui-button:hover {
+	background-color: lightgrey;
+	box-shadow: 1px 1px 1px grey;
+}
+
+.player-monster-button,
+.attack-button {
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+}
+
+#quit-button,
+#continue-button {
+	display: inline-block;
+	width: 200px;
+	height: 100px;
+}
+
+#inventory-button {
+	display: block;
+	margin: auto;
+	height: 100px;
+	width: 608px;
+	margin-top: 5px;
+}
+
+#new-game-button {
+	display: block;
+	margin: auto;
+	height: 100px;
+	width: 400px;
+}
+
+footer {
+	margin-top: 100px;
+}
