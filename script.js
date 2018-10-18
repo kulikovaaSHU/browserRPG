@@ -472,25 +472,40 @@ function playerAttack(attack){
 	}
 	else
 	{
-		playerMessageText.innerText = "\n" + playerMonster.monsterName +
-									"'s health: " + playerMonster.currentHealth;
-		
-		storyMessageText.innerText = "Your " + playerMonster.monsterName + 
+		//playerMessageText.innerText = "\n" + playerMonster.monsterName +
+		//							"'s health: " + playerMonster.currentHealth;
+		updateHealth();
+		playerMessageText.innerText = "\nYour " + playerMonster.monsterName + 
 									" was defeated by " + enemyMonster.monsterName + ".";
 		displayScore(-10);
-		encounterOver();
+    
+    if(aquarex.fainted && infernosaur.fainted && pterowind.fainted){
+		  encounterOver();
+    }
+    else if(aquarex.fainted || infernosaur.fainted || pterowind.fainted){
+      displayMonsters();
+    }
+    else{
+      encounterOver();
+    }
 	}
 }
 
 function updateHealth() {
 	if (playerMonster.monsterName == "Aquarex") {
 		aquarex.currentHealth = playerMonster.currentHealth;
+    if (aquarex.currentHealth == 0)
+      aquarex.fainted = true;
 	}
 	else if (playerMonster.monsterName == "Infernosaur") {
 		infernosaur.currentHealth = playerMonster.currentHealth;
+    if (infernosaur.currentHealth == 0)
+      infernosaur.fainted = true;
 	}
 	else if (playerMonster.monsterName == "Pterowind") {
 		pterowind.currentHealth = playerMonster.currentHealth;
+    if (pterowind.currentHealth == 0)
+      pterowind.fainted = true;
 	}
 }
 
@@ -515,9 +530,14 @@ function encounterOver() {
 	attack3Button.style.display = 'none';
 	newGameButton.style.display = 'none';
 	if(aquarex.fainted && infernosaur.fainted && pterowind.fainted) {
-		statusMessageText.innerText += "\n" + "All your monsters have" +
+		statusMessageText.innerText += "\n\n" + "All your monsters have" +
 					" fainted. You hurry to find your way home. Game Over.";
 		quitButton.style.display = 'inline-block';
+    storyMessageText.innerText = "";
+    enemyMessageText.innerText = "";
+    playerMessageText.innerText = "";
+    attackMessageText.innerText = "";
+    score = 0;
 	}
 	else {
 		continueButton.style.display = 'inline-block';
