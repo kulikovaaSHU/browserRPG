@@ -1,5 +1,6 @@
 //import Monster from './monster';
 
+// Monster Class
 class Monster {
 	constructor(){
 		this.monsterName = "Default";
@@ -17,20 +18,24 @@ class Monster {
 		this.initialHealth = 0;
 		this.fainted = false;
 	};
+  // Outputs player monster info
 	outputMonster(){
 		let output = "\nName: " + this.monsterName + "\nType: " + this.monsterType +
 					"\nHealth: " + this.currentHealth + "\nMoves: \n1. " + attack1Description +
 					"\n2. " + attack2Description + "\n3. " + attack3Description;
 		return output;
 	};
+  // Uses monster's first attack returning random damage within range
 	attack1(){
 		let damage = Math.floor(Math.random() * (this.attack1Max-this.attack1Min+1)) + this.attack1Min;
 		return damage; 
 	};
+  // Uses monster's second attack returning random damage within range
 	attack2(){
 		let damage = Math.floor(Math.random() * (this.attack2Max-this.attack2Min+1)) + this.attack2Min;
 		return damage; 
 	};
+  // Uses monster's heal abulity upping health by random amount within range
 	attack3(){
 		let heal = Math.floor(Math.random() * (this.attack3Max-this.attack3Min+1)) + this.attack3Min;
 		if(heal + this.currentHealth >= this.initialHealth){
@@ -42,6 +47,7 @@ class Monster {
 		}
 		return heal;
 	};
+  // Takes damage value and applies to monster's health
 	takeDamage(damage){
 		if (this.currentHealth - damage <= 0){
 			this.fainted = true;
@@ -52,14 +58,9 @@ class Monster {
 		}
 		return this.currentHealth;
 	};
-	returnHealth(){
-		return this.currentHealth;
-	};
-	returnFainted(){
-		return this.fainted;
-	};
 };
 
+// Set all text fields to variables
 let statusMessageText = document.getElementById('status-message'),
 	storyMessageText = document.getElementById('story-message'),
 	enemyMessageText = document.getElementById('enemy-message'),
@@ -76,16 +77,20 @@ let statusMessageText = document.getElementById('status-message'),
 	continueButton = document.getElementById('continue-button'),
 	quitButton = document.getElementById('quit-button');
 
+// All Monster variables
 let enemyMonster = new Monster(),
 	playerMonster = new Monster(),
 	aquarex = new Monster(),
 	infernosaur = new Monster(),
 	pterowind = new Monster();
 
+// Score variable
 let score = 0;
 
+// Picked Move variable
 let movePick = 0;
 
+// Displays New Game button, clears others
 function newGameSetup(){
 	aquarexButton.style.display = 'none';
 	infernosaurButton.style.display = 'none';
@@ -106,6 +111,7 @@ function newGameSetup(){
 	attackMessageText.innerText = "";
 }
 
+// Generate random adventure from array
 function randomAdventure(){
 	let adventures = ["You walk for hours, almost ready to turn back when: ",
                       "You turn right, facing a stone cliff: ",
@@ -128,6 +134,7 @@ function randomAdventure(){
     return adventures[pick];
 }
 
+// Generate random story from array
 function randomStory(){
 	let stories = ["Suddenly a giant shadow covers you!\n",
                    "You see a bush rustle!\n",
@@ -156,8 +163,11 @@ function randomStory(){
     return stories[pick];
 }
 
+// Listening for New Button being pressed
 newGameButton.addEventListener('click', function(){
+  // Generate new Enemy Monster
 	enemyMonster = randomMonster();
+  // Generate new game encounter story and adventure:
 	storyMessageText.innerText += "You walk into the field:\n" + randomStory() + "\nA wild " +
 								enemyMonster.monsterName + " (" + enemyMonster.monsterType + 
 								" type) appears!";
@@ -165,9 +175,11 @@ newGameButton.addEventListener('click', function(){
 	enemyMessageText.innerText = "";
 	playerMessageText.innerText = "";
 	attackMessageText.innerText = "";
+  // Display Player Monsters
 	displayMonsters();
 });
 
+// Generate a new random Enemy Monster: random name, type, health and damage
 function randomMonster(){
 	let monster = new Monster();
 	monster.monsterType = randomType();
@@ -186,6 +198,7 @@ function randomMonster(){
 	return monster;
 }	
 
+// Random type generator
 function randomType(){
 	let types = ['Fire', 'Ice', 'Dark', 'Grass', 'Water', 'Bug', 'Ground', 'Space', 'Magic', 'Flying', 
 	'Wind' , 'Fighting'];
@@ -193,6 +206,7 @@ function randomType(){
 	return types[pick];
 }
 
+// Generate random name based on monster type
 function randomName(type){
 	let prefix = "Default";
 	let suffix = "saur";
@@ -284,6 +298,7 @@ function randomName(type){
     return prefix + suffix;
 }
 
+// Set the Player Monster objects to defaults
 function initiatePlayerMonsters(){
 	aquarex.monsterName = "Aquarex";
     aquarex.monsterType = "Water";
@@ -341,6 +356,7 @@ function initiatePlayerMonsters(){
     						"\n3. " + pterowind.attack3Description); 
 }
 
+// Display Player Monster choices as buttons with all data
 function displayMonsters(){
 	playerMessageText.innerText = "Which monster do you pick?";
 	statusMessageText.innerText = "Score: " + score;
@@ -369,6 +385,7 @@ function displayMonsters(){
 	quitButton.style.display = 'none';
 }
 
+// Display Attack choises as buttons for picked Player Monster
 function displayAttacks(monster){
 	aquarexButton.style.display = "none";
 	infernosaurButton.style.display = "none";
@@ -392,6 +409,7 @@ function displayAttacks(monster){
 	attack3Button.innerText = monster.attack3Description;
 }
 
+// Player Monster button click listeners to pick current monster to use
 aquarexButton.addEventListener('click', function(){
 	playerMessageText.innerText = "Aquarex, go!";
 	playerMonster = aquarex;
@@ -410,6 +428,7 @@ pterowindButton.addEventListener('click', function(){
 	displayAttacks(pterowind);
 });
 
+// Attack button click listeners to pick a move for Player Monster to use
 attack1Button.addEventListener('click', function(){
 	playerAttack(1);
 });
@@ -422,7 +441,9 @@ attack3Button.addEventListener('click', function(){
 	playerAttack(3);
 });
 
+// Enemy Monster attack turn
 function monsterAttack() {
+  // As long as enemy health is above 0
 	if(!enemyMonster.fainted){
 		let pick = Math.floor(Math.random() * 3);
 		if (pick == 0)
@@ -442,6 +463,7 @@ function monsterAttack() {
 		enemyMessageText.innerText = "\n" + enemyMonster.monsterName + 
 									"'s health: " + enemyMonster.currentHealth;
 	}
+  // If enemy health is 0, monster defeated, encounter over
 	else
 	{
 		enemyMessageText.innerText = "\n" + enemyMonster.monsterName + 
@@ -453,7 +475,9 @@ function monsterAttack() {
 	}
 }
 
+// Player Monster attack turn
 function playerAttack(attack){
+  // As long as player picked monster health is above 0
 	if(!playerMonster.fainted){
 		if (attack == 1) {
 			enemyMonster.takeDamage(playerMonster.attack1());
@@ -470,6 +494,7 @@ function playerAttack(attack){
 									"'s health: " + playerMonster.currentHealth;
 		monsterAttack();
 	}
+  // Player picked monster health is 0
 	else
 	{
 		//playerMessageText.innerText = "\n" + playerMonster.monsterName +
@@ -478,19 +503,22 @@ function playerAttack(attack){
 		playerMessageText.innerText = "\nYour " + playerMonster.monsterName + 
 									" was defeated by " + enemyMonster.monsterName + ".";
 		displayScore(-10);
-    
+    // If all Player Monster have fainted trigger encounterOver()
     if(aquarex.fainted && infernosaur.fainted && pterowind.fainted){
 		  encounterOver();
     }
+    // If player monster is fainted trigger to pick another
     else if(aquarex.fainted || infernosaur.fainted || pterowind.fainted){
       displayMonsters();
     }
+    // Otherwise trigger encounterOver()
     else{
       encounterOver();
     }
 	}
 }
 
+// Keeps Player Monster health and status up to date with playerMonster object
 function updateHealth() {
 	if (playerMonster.monsterName == "Aquarex") {
 		aquarex.currentHealth = playerMonster.currentHealth;
@@ -509,6 +537,7 @@ function updateHealth() {
 	}
 }
 
+// Displays and updates player score
 function displayScore(scoreAdjust) {
 	if(score + scoreAdjust <= 0){
 		score = 0;
@@ -520,6 +549,7 @@ function displayScore(scoreAdjust) {
 	statusMessageText.innerText = "Score: " + score;
 }
 
+// Displays choice to quit or continue if unfainted monsters are available
 function encounterOver() {
 	aquarexButton.style.display = 'none';
 	infernosaurButton.style.display = 'none';
@@ -529,6 +559,7 @@ function encounterOver() {
 	attack2Button.style.display = 'none';
 	attack3Button.style.display = 'none';
 	newGameButton.style.display = 'none';
+  // End Game
 	if(aquarex.fainted && infernosaur.fainted && pterowind.fainted) {
 		statusMessageText.innerText += "\n\n" + "All your monsters have" +
 					" fainted. You hurry to find your way home. Game Over.";
@@ -539,18 +570,23 @@ function encounterOver() {
     attackMessageText.innerText = "";
     score = 0;
 	}
+  // Continue game
 	else {
 		continueButton.style.display = 'inline-block';
 		quitButton.style.display = 'inline-block';
 	}
 }
 
+// Quit button triggers page reload on click
 quitButton.addEventListener('click', function(){
 	location.reload();
 });
 
+// Continue button sets up next encounter on click
 continueButton.addEventListener('click', function(){
+  // Generate new random Enemy Monster
 	enemyMonster = randomMonster();
+  // Generate continuation of story for next encounter
 	storyMessageText.innerText = randomAdventure() + "\n" + randomStory() + "\nA wild " +
 								enemyMonster.monsterName + " (" + enemyMonster.monsterType + 
 								" type) appears!";
@@ -558,8 +594,11 @@ continueButton.addEventListener('click', function(){
 	enemyMessageText.innerText = "";
 	playerMessageText.innerText = "";
 	attackMessageText.innerText = "";
+  // Display Player Monsters
 	displayMonsters();
 });
 
+// Runs at load to set up New Game
 newGameSetup();
+// Runs at load to set Player Monster defaults
 initiatePlayerMonsters();
