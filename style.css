@@ -25,6 +25,13 @@ body {
 	height: 200px;
 }
 
+.inventory-content-button {
+	display: inline-block;
+	margin-top: 5px;
+	width: 200px;
+	height: 200px;
+}
+
 #quit-button,
 #continue-button {
 	display: inline-block;

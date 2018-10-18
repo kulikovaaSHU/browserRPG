@@ -58,9 +58,33 @@ class Monster {
 		}
 		return this.currentHealth;
 	};
+  usePotion(potionHealing){
+    if(potionHealing + this.currentHealth >= this.initialHealth){
+      this.currentHealth = this.initialHealth;
+    }
+    else
+    {
+      this.currentHealth += potionHealing;
+    }
+  };
 };
 
-// Set all text fields to variables
+//Inventory Class
+class Inventory {
+  constructor(){
+    this.potion = 0;
+    this.megaPotion = 0;
+    this.healAll = 0;
+    this.potionHeal = 25;
+    this.potionProbability = 50;
+    this.megaPotionHeal = 50;
+    this.megaPotionProbability = 25;
+    this.healAllHeal = 120;
+    this.healAllProbability = 5;
+  };
+};
+
+// Set all text fields and buttons to variables
 let statusMessageText = document.getElementById('status-message'),
 	storyMessageText = document.getElementById('story-message'),
 	enemyMessageText = document.getElementById('enemy-message'),
@@ -70,6 +94,9 @@ let statusMessageText = document.getElementById('status-message'),
 	infernosaurButton = document.getElementById('infernosaur-button'),
 	pterowindButton = document.getElementById('pterowind-button'),
 	inventoryButton = document.getElementById('inventory-button'),
+  potionButton = document.getElementById('potion-button'),
+  megaPotionButton = document.getElementById('mega-potion-button'),
+  healAllButton = document.getElementById('heal-all-button'),
 	attack1Button = document.getElementById('attack1-button'),
 	attack2Button = document.getElementById('attack2-button'),
 	attack3Button = document.getElementById('attack3-button'),
@@ -96,6 +123,9 @@ function newGameSetup(){
 	infernosaurButton.style.display = 'none';
 	pterowindButton.style.display = 'none';
 	inventoryButton.style.display = 'none';
+  potionButton.style.display = 'none';
+  megaPotionButton.style.display = 'none';
+  healAllButton.style.display = 'none';
 	attack1Button.style.display = 'none';
 	attack2Button.style.display = 'none';
 	attack3Button.style.display = 'none';
@@ -109,6 +139,33 @@ function newGameSetup(){
 	enemyMessageText.innerText = "";
 	playerMessageText.innerText = "";
 	attackMessageText.innerText = "";
+}
+
+// Inintialize inventory object with one potion
+let inventory = new Inventory();
+inventory.potion = 1;
+
+// Random item drop with lower chance for rarer items
+function randomItemDrop(){
+  let diceRoll = Math.floor(Math.random() * 101);
+  if(diceRoll < 45){
+    inventory.potion += 1;
+    storyMessageText.innerText += "\nA Potion was dropped. " +
+                  "You pick it up and put it in your inventory.";
+  }
+  else if(diceRoll >= 45 && diceRoll < 75){
+    inventory.megaPotion += 1;
+    storyMessageText.innerText += "\nA Mega Potion was dropped. " +
+                  "You pick it up and put it in your inventory.";
+  }
+  else if(diceRoll >=75 && diceRoll < 80){
+    inventory.healAll += 1;
+    storyMessageText.innerText += "\nA HealAll Potion was dropped. " +
+                  "You pick it up and put it in your inventory.";
+  }
+  else{
+    storyMessageText.innerText += "\nMonster didn't drop anything.";
+  }
 }
 
 // Generate random adventure from array
@@ -441,6 +498,38 @@ attack3Button.addEventListener('click', function(){
 	playerAttack(3);
 });
 
+// On inventory button click show inventory contents
+inventoryButton.addEventListener('click', function(){
+  inventoryButton.style.display = 'none';
+  attack1Button.style.display = 'none';
+  attack2Button.style.display = 'none';
+  attack3Button.style.display = 'none';
+
+  potionButton.style.display = 'inline-block';
+  megaPotionButton.style.display = 'inline-block';
+  healAllButton.style.display = 'inline-block';
+
+  potionButton.innerText = "Potion: \nHeals: " + inventory.potionHeal
+                        + "\nAmount: " + inventory.potion;
+  megaPotionButton.innerText = "Mega Potion: \nHeals: " + inventory.megaPotionHeal
+                        + "\nAmount: " + inventory.megaPotion;
+  healAllButton.innerText = "HealAll Potion: \nHeals: " + inventory.healAllHeal
+                        + "\nAmount: " + inventory.healAll;
+});
+
+// Item button clicks use up the item
+potionButton.addEventListener('click', function(){
+  inventory.potion -= 1;
+  playerMonster.usePotion(inventory.potionHeal);
+
+  potionButton.style.display = 'none';
+  megaPotionButton.style.display = 'none';
+  healAllButton.style.display = 'none';
+
+  displayAttacks(playerMonster);
+  monsterAttack();
+});
+
 // Enemy Monster attack turn
 function monsterAttack() {
   // As long as enemy health is above 0
@@ -470,6 +559,8 @@ function monsterAttack() {
 									"'s health: " + enemyMonster.currentHealth;
 		storyMessageText.innerText = "Your " + playerMonster.monsterName + 
 									" defeated " + enemyMonster.monsterName + "!";
+
+    randomItemDrop();
 		displayScore(10);
 		encounterOver();
 	}
