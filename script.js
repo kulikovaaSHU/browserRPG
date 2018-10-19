@@ -429,13 +429,13 @@ function initiatePlayerMonsters(){
 // Display Player Monster choices as buttons with all data
 function displayMonsters(){
   storyMessageText.style.display = 'block';
-  enemyMessageText.style.display = 'none';
+  enemyMessageText.style.display = 'block';
   playerMessageText.style.display = 'block';
   attackMessageText.style.display = 'none';
 
 	playerMessageText.innerText = "Which monster do you pick?";
 	statusMessageText.innerText = "Score: " + score;
-	enemyMessageText.innerText = "";
+	enemyMessageText.innerText = enemyMonster.monsterName + "'s health: " + enemyMonster.currentHealth;
 	attackMessageText.innerText = "";
 
 	aquarexButton.innerText = ("Aquarex:\nType: " + aquarex.monsterType + "\nHealth: " + aquarex.currentHealth + 
@@ -475,13 +475,13 @@ function displayAttacks(monster){
 	inventoryButton.style.display = 'block';
 
   storyMessageText.style.display = 'block';
-  enemyMessageText.style.display = 'none';
+  enemyMessageText.style.display = 'block';
   playerMessageText.style.display = 'block';
   attackMessageText.style.display = 'none';
 
 	playerMessageText.innerText += "\nPick " + monster.monsterName + "'s move or open inventory: ";
 	statusMessageText.innerText = "Score: " + score;
-	enemyMessageText.innerText = "";
+	enemyMessageText.innerText = enemyMonster.monsterName + "'s health: " + enemyMonster.currentHealth;
 	attackMessageText.innerText = "";
 
 	attack1Button.innerText = monster.attack1Description;
