@@ -519,15 +519,15 @@ inventoryButton.addEventListener('click', function(){
 
 // Item button clicks use up the item
 potionButton.addEventListener('click', function(){
-  inventory.potion -= 1;
-  playerMonster.usePotion(inventory.potionHeal);
+  playerAttack(4);
+});
 
-  potionButton.style.display = 'none';
-  megaPotionButton.style.display = 'none';
-  healAllButton.style.display = 'none';
+megaPotionButton.addEventListener('click', function(){
+  playerAttack(5);
+});
 
-  displayAttacks(playerMonster);
-  monsterAttack();
+healAllButton.addEventListener('click', function(){
+  playerAttack(6);
 });
 
 // Enemy Monster attack turn
@@ -561,7 +561,12 @@ function monsterAttack() {
 									" defeated " + enemyMonster.monsterName + "!";
 
     randomItemDrop();
-		displayScore(10);
+    if(enemyMonster.initialHealth >= 120)
+      displayScore(20);
+    else if(enemyMonster.initialHealth >= 100)
+		  displayScore(15);
+    else if(enemyMonster.initialHealth < 100)
+      displayScore(10);
 		encounterOver();
 	}
 }
@@ -576,11 +581,51 @@ function playerAttack(attack){
 		else if (attack == 2) {
 			enemyMonster.takeDamage(playerMonster.attack2());
 		}
-		else
-		{
+		else if (attack == 3) {
 			playerMonster.attack3();
 			updateHealth();
 		}
+    // Use items
+    else if (attack == 4 || attack == 5 || attack == 6) {
+      // Use Potion
+      if(attack == 4) {
+        if(inventory.potion > 0) {
+          inventory.potion -= 1;
+          playerMonster.usePotion(inventory.potionHeal);
+        }
+        else {
+          inventory.potion = 0;
+        }
+      }
+      // Use Mega Potion
+      else if(attack == 5) {
+        if(inventory.megaPotion > 0) {
+          inventory.megaPotion -= 1;
+          playerMonster.usePotion(inventory.megaPotionHeal);
+        }
+        else {
+          inventory.megaPotion = 0;
+        }
+      }
+      // Use HealAll Potion
+      else if(attack == 6) {
+        if(inventory.healAll > 0) {
+          inventory.healAll -= 1;
+          playerMonster.usePotion(inventory.healAllHeal);
+        }
+        else {
+          inventory.healAll = 0;
+        }
+      }
+
+      updateHealth();
+
+      potionButton.style.display = 'none';
+      megaPotionButton.style.display = 'none';
+      healAllButton.style.display = 'none';
+
+      displayAttacks(playerMonster);
+    }
 		playerMessageText.innerText = "\n" + playerMonster.monsterName +
 									"'s health: " + playerMonster.currentHealth;
 		monsterAttack();
@@ -593,13 +638,16 @@ function playerAttack(attack){
 		updateHealth();
 		playerMessageText.innerText = "\nYour " + playerMonster.monsterName + 
 									" was defeated by " + enemyMonster.monsterName + ".";
-		displayScore(-10);
+		displayScore(-5);
     // If all Player Monster have fainted trigger encounterOver()
     if(aquarex.fainted && infernosaur.fainted && pterowind.fainted){
 		  encounterOver();
     }
     // If player monster is fainted trigger to pick another
     else if(aquarex.fainted || infernosaur.fainted || pterowind.fainted){
+      potionButton.style.display = 'none';
+      megaPotionButton.style.display = 'none';
+      healAllButton.style.display = 'none';
       displayMonsters();
     }
     // Otherwise trigger encounterOver()
@@ -650,6 +698,9 @@ function encounterOver() {
 	attack2Button.style.display = 'none';
 	attack3Button.style.display = 'none';
 	newGameButton.style.display = 'none';
+  potionButton.style.display = 'none';
+  megaPotionButton.style.display = 'none';
+  healAllButton.style.display = 'none';
   // End Game
 	if(aquarex.fainted && infernosaur.fainted && pterowind.fainted) {
 		statusMessageText.innerText += "\n\n" + "All your monsters have" +
