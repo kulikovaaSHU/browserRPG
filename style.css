@@ -1,35 +1,84 @@
 body {
 	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	background-image: url("background.jpg");
+	background-attachment: fixed;
+	background-size: 100%;
 }
 
 .container {
 	margin: auto;
+	margin-top: 2%;
+	width: 60%;
+	background-color: rgba(255,255,255,0.8);
+	padding: 2%;
+	border-radius: 5px;
+}
+
+h1 {
+	color: #306356;
+	font-size: 35px;
+}
+
+.text-paragraph {
+	background-color: rgba(255,255,255,1);
+	padding: 5px;
+	border-radius: 50px;
+	width: 50%;
+	margin: auto;
+	margin-bottom: 2%;
+	border: 1px solid #306356;
+	box-shadow: 1px 1px 2px grey;
+}
+
+#story-message {
+	width: 60%;
+	padding: 2%;
+}
+
+#enemy-message {
+	margin-right: 13%;
+	background-color: #f7d9d9;
+	border-color: #7c3543;
+}
+
+#player-message {
+	margin-left: 13%;
+	background-color: #d9f7e9;
 }
 
 .ui-button {
 	background-color: white;
 	color: black;
-	border: solid 1px black;
+	border: solid 2px #439982;
 	box-shadow: 1px 2px 1px grey;
+	border-radius: 4px;
+	margin-top: 2%;
 }
 
 .ui-button:hover {
-	background-color: lightgrey;
+	background-color: #d9f7e9;
 	box-shadow: 1px 1px 1px grey;
 }
 
-.player-monster-button,
-.attack-button {
+.player-monster-button {
 	display: inline-block;
 	width: 200px;
 	height: 200px;
+}
+
+.attack-button {
+	display: inline-block;
+	width: 200px;
+	height: 100px;
 }
 
 .inventory-content-button {
 	display: inline-block;
 	margin-top: 5px;
 	width: 200px;
-	height: 200px;
+	height: 100px;
 }
 
 #quit-button,
@@ -56,4 +105,35 @@ body {
 
 footer {
 	margin-top: 100px;
+	color: #5e8477;
+}
+
+@media screen and (max-width: 850px) {
+	.ui-button {
+		width: 200px;
+		height: 110px;
+		font-size: 11px;
+	}
+
+	.attack-button,
+	.inventory-content-button,
+	#inventory-button,
+	#new-game-button,
+	#continue-button,
+	#quit-button {
+		width: 200px;
+		height: 60px;
+	}
+
+	.container {
+		font-size: 11px;
+	}
+
+	#story-message {
+		width: 90%;
+	}
+
+	h1 {
+		font-size: 25px;
+	}
 }

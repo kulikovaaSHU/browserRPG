@@ -134,11 +134,18 @@ function newGameSetup(){
 
 	newGameButton.style.display = 'block';
 
+  statusMessageText.style.display = 'block';
+  storyMessageText.style.display = 'none';
+  enemyMessageText.style.display = 'none';
+  playerMessageText.style.display = 'none';
+  attackMessageText.style.display = 'none';
+
 	statusMessageText.innerText = "Press 'New Game' to Start!";
 	storyMessageText.innerText = "";
 	enemyMessageText.innerText = "";
 	playerMessageText.innerText = "";
 	attackMessageText.innerText = "";
+  
 }
 
 // Inintialize inventory object with one potion
@@ -224,6 +231,12 @@ function randomStory(){
 newGameButton.addEventListener('click', function(){
   // Generate new Enemy Monster
 	enemyMonster = randomMonster();
+
+  storyMessageText.style.display = 'block';
+  enemyMessageText.style.display = 'none';
+  playerMessageText.style.display = 'none';
+  attackMessageText.style.display = 'none';
+
   // Generate new game encounter story and adventure:
 	storyMessageText.innerText += "You walk into the field:\n" + randomStory() + "\nA wild " +
 								enemyMonster.monsterName + " (" + enemyMonster.monsterType + 
@@ -415,6 +428,11 @@ function initiatePlayerMonsters(){
 
 // Display Player Monster choices as buttons with all data
 function displayMonsters(){
+  storyMessageText.style.display = 'block';
+  enemyMessageText.style.display = 'none';
+  playerMessageText.style.display = 'block';
+  attackMessageText.style.display = 'none';
+
 	playerMessageText.innerText = "Which monster do you pick?";
 	statusMessageText.innerText = "Score: " + score;
 	enemyMessageText.innerText = "";
@@ -455,6 +473,11 @@ function displayAttacks(monster){
 	attack2Button.style.display = 'inline-block';
 	attack3Button.style.display = 'inline-block';
 	inventoryButton.style.display = 'block';
+
+  storyMessageText.style.display = 'block';
+  enemyMessageText.style.display = 'none';
+  playerMessageText.style.display = 'block';
+  attackMessageText.style.display = 'none';
 
 	playerMessageText.innerText += "\nPick " + monster.monsterName + "'s move or open inventory: ";
 	statusMessageText.innerText = "Score: " + score;
@@ -573,6 +596,11 @@ function monsterAttack() {
 
 // Player Monster attack turn
 function playerAttack(attack){
+  storyMessageText.style.display = 'block';
+  enemyMessageText.style.display = 'block';
+  playerMessageText.style.display = 'block';
+  attackMessageText.style.display = 'none';
+
   // As long as player picked monster health is above 0
 	if(!playerMonster.fainted){
 		if (attack == 1) {
@@ -710,6 +738,11 @@ function encounterOver() {
     enemyMessageText.innerText = "";
     playerMessageText.innerText = "";
     attackMessageText.innerText = "";
+
+    storyMessageText.style.display = 'none';
+    enemyMessageText.style.display = 'none';
+    playerMessageText.style.display = 'none';
+    attackMessageText.style.display = 'none';
     score = 0;
 	}
   // Continue game
@@ -729,6 +762,11 @@ continueButton.addEventListener('click', function(){
   // Generate new random Enemy Monster
 	enemyMonster = randomMonster();
   // Generate continuation of story for next encounter
+  storyMessageText.style.display = 'block';
+  enemyMessageText.style.display = 'none';
+  playerMessageText.style.display = 'none';
+  attackMessageText.style.display = 'none';
+
 	storyMessageText.innerText = randomAdventure() + "\n" + randomStory() + "\nA wild " +
 								enemyMonster.monsterName + " (" + enemyMonster.monsterType + 
 								" type) appears!";
