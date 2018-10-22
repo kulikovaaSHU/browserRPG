@@ -1,0 +1,41 @@
+Type:			Weak to:			Neutral to:			Strong to:		
+
+Fire			Water, Ground		Dark, Space			Grass, Bug
+				Wind				Magic, Flying		Ice, Fighting		
+
+Ice				Fire, Water			Dark, Bug, Ground	Grass, Space
+				Fighting			Magic				Flying, Wind
+
+Dark			Fire, Magic			Grass, Water		Bug, Space
+				Fighting			Ground, Flying		Ice
+									Wind
+
+Grass			Fire, Bug			Dark, Space			Water, Ground
+				Ice					Magic, Flying		Wind
+									Fighting
+
+Water			Grass, Ice			Dark, Bug			Fire, Ground
+				Wind				Space, Fighting		Magic
+									Flying
+
+Bug				Fire, Ice			Dark, Water			Grass, Ground
+				Space, Flying		Magic, Fighting		Wind
+
+Ground			Ice, Grass			Fire, Dark			Space, Magic
+				Water, Wind			Bug, Flying			Fighting
+
+
+Space			Ice, Dark			Fire, Water			Grass, Bug
+				Ground, Magic		Flying				Wind, Fighting
+
+Magic			Water, Ground		Fire, Ice, Grass	Dark, Space, Wind
+				Fighting			Bug					Flying
+
+Flying			Ice, Magic, Space	Fire, Dark, Bug		Wind, Ground,
+				Water				Grass				Fighting
+
+Wind			Ice, Grass, Bug		Flying,	Dark		Wind, Water, Ground
+				Space				Magic, Fighting
+
+Fighting		Fire, Ground		Grass, Water		Ice, Dark, Magic
+				Space, Flying		Wind				Bug

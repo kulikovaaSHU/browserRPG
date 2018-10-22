@@ -104,6 +104,7 @@ let statusMessageText = document.getElementById('status-message'),
 	continueButton = document.getElementById('continue-button'),
 	quitButton = document.getElementById('quit-button');
 
+// Set all type images
 let enemyTypeImage = document.getElementById('enemy-type-image'),
     playerTypeImage = document.getElementById('player-type-image');
 
@@ -279,6 +280,7 @@ function randomType(){
 	return types[pick];
 }
 
+// Return type image when provided with type
 function setTypeImage(type) {
   if(type == "Fire"){
     return "typeImages/fire.png";
@@ -325,30 +327,30 @@ function setTypeImage(type) {
 function randomName(type){
 	let prefix = "Default";
 	let suffix = "saur";
-	let fire_name_prefix = [ 'Fire','Heat','Melt','Lava','Hot','Steam','Magma','Explodo','Flame','Inferno'];
-	let fire_name_suffix = [ 'rock','steel','steam','soot','ash','saur','rex','sear','burn','smoke','fry'];
-	let ice_name_prefix = [ 'Ice','Icicle','Frost','Freeze','Snow','Cold','Chill','Hale'];
-	let ice_name_suffix = [ 'storm','wind','y','icer','mare','saur','rex','ray',' Beast',' Bird', ' Bear'];
-	let dark_name_prefix = [ 'Evil','Devil','Dark','Dread','Fear','Sorrow','Broken','Shadow','Shade','Black','Grey','Fright','Horror'];
-	let dark_name_suffix = [ ' Devil',' Raven',' Bat',' Wolf','beast',' Abomination',' King',' Viper', 'rey','saur','rex'];
-	let grass_name_prefix = [ 'Leaf','Branch','Tree','Greene','Bloom','Aroma','Polen','Honey','Sweet','Fresh'];
-	let grass_name_suffix = [ ' Flower', 'stick','grow','root','fruit','berry','sprout'];
-	let water_name_prefix = [ 'Flow','Spring','River','Sea','Ocean','Dive','Wave','Splash','Serene','Aqua','Coral','Reef','Float'];
-	let water_name_suffix = [ 'bubble','stream','deapth','stormer','rainy','row','fin','gills','deep','er','ay','saur','rex','fei'];
-	let bug_name_prefix = [ 'Fire', 'Manywing','Golden','Stripe','Shine','Horn','Centi','Butter','Dragon'];
-	let bug_name_suffix = [ 'buzz','fly','wing','pede','soar','crawl','ezz','flap','ula','bite','sting'];
-	let ground_name_prefix = [ 'Rock','Sedament','Sand','Stone','Lime','Lava','Earth','Minera','Granite','Mud','Clay','Dust','Marble'];
-	let ground_name_suffix = [ 'stomper','or','quake','shake','storm','dig','dug','mantle','melt','saur','rex','ren','more'];
-	let space_name_prefix = [ 'Gravity','Float','Cosmos','Alien','Space','Specimen','Abduct','Extraterestrial','Mars','Venus','Saturn','Pluto','Titan'];
-	let space_name_suffix = [ 'invader','pilot','destroyer','or','er','man','void','matter','leader','soldier'];
-    let magic_name_prefix = [ 'Magic','Enchant','Mystery','Secret','Mana','Potion','Wizard','Witch','Wiz'];
-    let magic_name_suffix = [ 'cultist','ed','ment','robed','mage','mirage','trick'];
-    let flying_name_prefix = [ 'Fly','Soar','Feather','Blue','Red','Golden','Ptero','Split','Roam','Caw','Raven'];
-    let flying_name_suffix = [ 'wing','puff','beak','claw','tail'];
-    let wind_name_prefix = [ 'Wind','Gull','Breath','Breathe','Gust','Flow','Storm','Twister'];
-    let wind_name_suffix = [ 'blow','er','ex','fresh','free','sky','atmos','air','ozoner'];
-    let fighting_name_prefix = [ 'Fist','Kick','Knock','Punch','Uppercut','Martial','Melee'];
-    let fighting_name_suffix = [ 'fighter','puncher','out','soldier','knight','hitter'];
+	let fire_name_prefix = [ 'Fire','Heat','Melt','Lava','Hot','Steam','Magma','Explodo','Flame','Inferno', 'Spark', 'Ash', 'Soot', 'Flare', 'Fuel', 'Combust', 'Scorch', 'Blaze', 'Blast', 'Sear'];
+	let fire_name_suffix = [ 'rock','steel','steam','soot','ash','saur','rex','sear','burn','smoke','fry', 'er', 'ry', 'boom', 'en', 'fer', 'core', 'der', 'char', 'singe'];
+	let ice_name_prefix = [ 'Ice','Icicle','Frost','Freeze','Snow','Cold','Chill','Hale', 'Flake', 'Froze', 'Cool', 'Galcier', 'Crystal', 'Arctic','Icy'];
+	let ice_name_suffix = [ 'storm','wind','y','icer','mare','saur','rex','ray',' Beast',' Bird', ' Bear', 'ice', 'fall', 'eme', 'ere', 'ier', 'er', 'cy'];
+	let dark_name_prefix = [ 'Evil','Devil','Dark','Dread','Fear','Sorrow','Broken','Shadow','Shade','Black','Grey','Fright','Horror', 'Night', 'Gloom', 'Sullen', 'Sinister', 'Wicked', 'Diabolic', 'Vile', 'Ugly', 'Vicious', 'Atrocious', 'Violent', 'Fiend'];
+	let dark_name_suffix = [ ' Devil',' Raven',' Bat',' Wolf','beast',' Abomination',' King',' Viper', 'rey','saur','rex', ' Freak', ' Giant', ' Ogre', ' Mutant', 'Leviathan', ' Ghost', ' Spirit', ' Killer', ' Chimera', ' Colossus', ' Goliath', ' Zombie'];
+	let grass_name_prefix = [ 'Leaf','Branch','Tree','Greene','Bloom','Aroma','Pollen','Honey','Sweet','Fresh', 'Pasture', 'Weed', 'Vege', 'Forest', 'Fern', 'Vegie', 'Mossy', 'Moss', 'Fungus', 'Flora', 'Grew'];
+	let grass_name_suffix = [ ' Flower', 'stick','grow','root','fruit','berry','sprout', 'fungus', 'moss', 'shroom', 'plant', 'root', 'saur', 'rex', 'ier', 'grown', 'grew', 'green', 'wilt', 'herb', 'algae', 'rane', 'ber'];
+	let water_name_prefix = [ 'Flow','Spring','River','Sea','Ocean','Dive','Wave','Splash','Serene','Aqua','Coral','Reef','Float', 'Lake', 'Pond', 'Liquid', 'Puddle', 'Wet', 'Stream', 'Hydro', 'Aqui', 'Fog', 'Dew'];
+	let water_name_suffix = [ 'bubble','stream','deapth','stormer','rainy','row','fin','gills','deep','er','ay','saur','rex','fei', 'fish', 'bass', 'shark', 'whale', 'frog', 'eel', 'cod', 'carp', 'saur', 'rex', 'er', 'ier', 'salt'];
+	let bug_name_prefix = [ 'Fire', 'Manywing','Golden','Stripe','Shine','Horn','Centi','Butter','Dragon', 'Pester', 'Torment', 'Tease', 'Polli', 'Milli', 'Roach', 'Hover', 'Poison', 'Stinger', 'Bit', 'Red', 'Giant'];
+	let bug_name_suffix = [ 'buzz','fly','wing','pede','soar','crawl','ezz','flap','ula','bite','sting', 'pest', 'germ', 'beetle', 'spider', 'worm', 'pupa', 'moth', 'hornet', 'flea'];
+	let ground_name_prefix = [ 'Rock','Sediment','Sand','Stone','Lime','Lava','Earth','Minera','Granite','Mud','Clay','Dust','Marble', 'Ground', 'Boulder', 'Pebble', 'Quartz', 'Petrify', 'Deposit', 'Sand', 'Erosion', 'Basin', 'Mud', 'Dune', 'Gravel', 'Sludge'];
+	let ground_name_suffix = [ 'stomper','or','quake','shake','storm','dig','dug','mantle','melt','saur','rex','ren','more', 'mill', 'mash', 'grate', 'crunch', 'crush', 'grind', 'crank', 'press', 'mold', 'fragment'];
+	let space_name_prefix = [ 'Gravity','Float','Cosmos','Alien','Space','Specimen','Abduct','Extraterestrial','Mars','Venus','Saturn','Pluto','Titan', 'Vacuum', 'Expanse', 'Void', 'Deep', 'Orbit', 'Universe', 'Satelite', 'Sphere', 'Hubble', 'Planet', 'Galaxy', 'Moon', 'Comet', 'Asteroid', 'Cosmic', 'Meteor', 'Object'];
+	let space_name_suffix = [ 'invader','pilot','destroyer','or','er','man','void','matter','leader','soldier', 'sentient', 'being', 'martian', 'humanoid', 'mystery', 'demon', 'evil', 'estrange', ' Outlander', ' Exile', ' Imposter', ' Stranger', 'onoid'];
+    let magic_name_prefix = [ 'Magic','Enchant','Mystery','Secret','Mana','Potion','Wizard','Witch','Wiz', 'Trick', 'Genious', 'Juju', 'Spirit', 'Decept', 'Magi', 'Spell', 'Marvel', 'Imagine', 'Charm'];
+    let magic_name_suffix = [ 'cultist','ed','ment','robed','mage','mirage','trick', 'fool', 'ion', 'er', 'mystic', 'witcher', 'sorcerer', 'illusion', 'warlock'];
+    let flying_name_prefix = [ 'Fly','Soar','Feather','Blue','Red','Golden','Ptero','Split','Roam','Caw','Raven', 'Flown', 'Flew', 'Glide', 'Flee' , 'Flutter', 'Lift', 'Fan'];
+    let flying_name_suffix = [ 'wing','puff','beak','claw','tail', 'feather', 'flap', 'bird', 'nester', 'fowl', 'vulture', 'finch', 'er', 'ier', 'saur', 'pter', 'ail', 'koo', 'bill', 'heron'];
+    let wind_name_prefix = [ 'Wind','Gull','Breath','Breathe','Gust','Flow','Storm','Twister', 'Air', 'Monsoon', 'Cyclone', 'Breeze', 'Lift','Gale', 'Squall', 'Zephyr', 'Typhoon', 'Twist'];
+    let wind_name_suffix = [ 'blow','er','ex','fresh','free','sky','atmos','air','ozoner', 'ozone', 'windy', 'stream', 'sar', 'zer', 'raf'];
+    let fighting_name_prefix = [ 'Fist','Kick','Knock','Punch','Uppercut','Martial','Melee', 'War', 'Battle', 'Struggle', 'Combat', 'Fight', 'Duel', 'Skirmish', 'Resist', 'Brawler', 'Tug', 'Sword', 'Knife', 'Arrow'];
+    let fighting_name_suffix = [ ' Fighter',' Puncher','out',' Soldier', 'hitter',' Wrestler',' Knight', ' Defender', ' Comander', ' Crusader', ' Gunner'];
 
     if (type == 'Fire')
     {
@@ -610,12 +612,12 @@ function monsterAttack() {
 		let pick = Math.floor(Math.random() * 3);
 		if (pick == 0)
 		{
-			playerMonster.takeDamage(enemyMonster.attack1());
+			playerMonster.takeDamage(Math.round(enemyMonster.attack1()*typeEffect(enemyMonster.monsterType, playerMonster.monsterType)));
 			updateHealth();
 		}
 		else if(pick == 1)
 		{
-			playerMonster.takeDamage(enemyMonster.attack2());
+			playerMonster.takeDamage(Math.round(enemyMonster.attack2()*typeEffect(enemyMonster.monsterType, playerMonster.monsterType)));
 			updateHealth();
 		}
 		else
@@ -656,10 +658,10 @@ function playerAttack(attack){
   // As long as player picked monster health is above 0
 	if(!playerMonster.fainted){
 		if (attack == 1) {
-			enemyMonster.takeDamage(playerMonster.attack1());
+			enemyMonster.takeDamage(Math.round(playerMonster.attack1()*typeEffect(playerMonster.monsterType, enemyMonster.monsterType)));
 		}
 		else if (attack == 2) {
-			enemyMonster.takeDamage(playerMonster.attack2());
+			enemyMonster.takeDamage(Math.round(playerMonster.attack2()*typeEffect(playerMonster.monsterType, enemyMonster.monsterType)));
 		}
 		else if (attack == 3) {
 			playerMonster.attack3();
@@ -807,6 +809,144 @@ function encounterOver() {
 		continueButton.style.display = 'inline-block';
 		quitButton.style.display = 'inline-block';
 	}
+}
+
+function typeEffect(attackerType, defenderType){
+  let weakTo = 1.25;
+  let neutralTo = 1;
+  let strongTo = 0.75
+  if (defenderType == "Fire") {
+    if(attackerType == "Water" || attackerType == "Ground" || attackerType == "Wind"){
+      return weakTo;
+    }
+    else if(attackerType == "Grass" || attackerType == "Bug" || attackerType == "Ice" || attackerType == "Fighting") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Ice") {
+    if(attackerType == "Water" || attackerType == "Fire" || attackerType == "Fighting"){
+      return weakTo;
+    }
+    else if(attackerType == "Grass" || attackerType == "Space" || attackerType == "Flying" || attackerType == "Wind") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Dark") {
+    if(attackerType == "Fire" || attackerType == "Magic" || attackerType == "Fighting"){
+      return weakTo;
+    }
+    else if(attackerType == "Space" || attackerType == "Bug" || attackerType == "Ice") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Grass") {
+    if(attackerType == "Fire" || attackerType == "Bug" || attackerType == "Ice"){
+      return weakTo;
+    }
+    else if(attackerType == "Water" || attackerType == "Ground" || attackerType == "Wind") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Water") {
+    if(attackerType == "Grass" || attackerType == "Ice" || attackerType == "Wind"){
+      return weakTo;
+    }
+    else if(attackerType == "Fire" || attackerType == "Ground" || attackerType == "Magic") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Bug") {
+    if(attackerType == "Fire" || attackerType == "Ice" || attackerType == "Space" || attackerType == "Flying"){
+      return weakTo;
+    }
+    else if(attackerType == "Grass" || attackerType == "Ground" || attackerType == "Wind") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Ground") {
+    if(attackerType == "Water" || attackerType == "Ice" || attackerType == "Wind" || attackerType == "Grass"){
+      return weakTo;
+    }
+    else if(attackerType == "Space" || attackerType == "Magic" || attackerType == "Fighting") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Space") {
+    if(attackerType == "Ice" || attackerType == "Ground" || attackerType == "Dark" || attackerType == "Magic"){
+      return weakTo;
+    }
+    else if(attackerType == "Grass" || attackerType == "Bug" || attackerType == "Wind" || attackerType == "Fighting") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Magic") {
+    if(attackerType == "Water" || attackerType == "Ground" || attackerType == "Fighting"){
+      return weakTo;
+    }
+    else if(attackerType == "Dark" || attackerType == "Space" || attackerType == "Wind" || attackerType == "Flying") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Flying") {
+    if(attackerType == "Water" || attackerType == "Ice" || attackerType == "Magic" || attackerType == "Space"){
+      return weakTo;
+    }
+    else if(attackerType == "Wind" || attackerType == "Ground" || attackerType == "Fighting") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Wind") {
+    if(attackerType == "Ice" || attackerType == "Grass" || attackerType == "Bug" || attackerType == "Space"){
+      return weakTo;
+    }
+    else if(attackerType == "Fire" || attackerType == "Water" || attackerType == "Ground") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
+  else if (defenderType == "Fighting") {
+    if(attackerType == "Fire" || attackerType == "Ground" || attackerType == "Space" || attackerType == "Flying"){
+      return weakTo;
+    }
+    else if(attackerType == "Dark" || attackerType == "Magic" || attackerType == "Ice" || attackerType == "Bug") {
+      return strongTo;
+    }
+    else {
+      return neutralTo;
+    }
+  }
 }
 
 // Quit button triggers page reload on click
