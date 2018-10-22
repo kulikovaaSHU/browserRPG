@@ -104,6 +104,9 @@ let statusMessageText = document.getElementById('status-message'),
 	continueButton = document.getElementById('continue-button'),
 	quitButton = document.getElementById('quit-button');
 
+let enemyTypeImage = document.getElementById('enemy-type-image'),
+    playerTypeImage = document.getElementById('player-type-image');
+
 // All Monster variables
 let enemyMonster = new Monster(),
 	playerMonster = new Monster(),
@@ -276,6 +279,48 @@ function randomType(){
 	return types[pick];
 }
 
+function setTypeImage(type) {
+  if(type == "Fire"){
+    return "typeImages/fire.png";
+  }
+  else if(type == "Ice"){
+    return "typeImages/ice.png";
+  }
+  else if(type == "Dark"){
+    return "typeImages/dark.png";
+  }
+  else if(type == "Grass"){
+    return "typeImages/grass.png";
+  }
+  else if(type == "Water"){
+    return "typeImages/water.png";
+  }
+  else if(type == "Bug"){
+    return "typeImages/bug.png";
+  }
+  else if(type == "Ground"){
+    return "typeImages/ground.png";
+  }
+  else if(type == "Space"){
+    return "typeImages/space.png";
+  }
+  else if(type == "Magic"){
+    return "typeImages/magic.png";
+  }
+  else if(type == "Flying"){
+    return "typeImages/flying.png";
+  }
+  else if(type == "Wind"){
+    return "typeImages/wind.png";
+  }
+  else if(type == "Fighting"){
+    return "typeImages/fighting.png";
+  }
+  else {
+    return "";
+  }
+}
+
 // Generate random name based on monster type
 function randomName(type){
 	let prefix = "Default";
@@ -438,6 +483,8 @@ function displayMonsters(){
 	enemyMessageText.innerText = enemyMonster.monsterName + "'s health: " + enemyMonster.currentHealth;
 	attackMessageText.innerText = "";
 
+  enemyTypeImage.src = setTypeImage(enemyMonster.monsterType);
+
 	aquarexButton.innerText = ("Aquarex:\nType: " + aquarex.monsterType + "\nHealth: " + aquarex.currentHealth + 
     						"\nAttacks:\n1. " + aquarex.attack1Description + "\n2. " + aquarex.attack2Description +
     						"\n3. " + aquarex.attack3Description); 
@@ -478,6 +525,9 @@ function displayAttacks(monster){
   enemyMessageText.style.display = 'block';
   playerMessageText.style.display = 'block';
   attackMessageText.style.display = 'none';
+
+  playerTypeImage.style.display = 'inline-block';
+  playerTypeImage.src = setTypeImage(playerMonster.monsterType);
 
 	playerMessageText.innerText += "\nPick " + monster.monsterName + "'s move or open inventory: ";
 	statusMessageText.innerText = "Score: " + score;
@@ -601,6 +651,8 @@ function playerAttack(attack){
   playerMessageText.style.display = 'block';
   attackMessageText.style.display = 'none';
 
+  
+
   // As long as player picked monster health is above 0
 	if(!playerMonster.fainted){
 		if (attack == 1) {
@@ -663,6 +715,8 @@ function playerAttack(attack){
 	{
 		//playerMessageText.innerText = "\n" + playerMonster.monsterName +
 		//							"'s health: " + playerMonster.currentHealth;
+    playerTypeImage.style.display = 'none';
+
 		updateHealth();
 		playerMessageText.innerText = "\nYour " + playerMonster.monsterName + 
 									" was defeated by " + enemyMonster.monsterName + ".";
@@ -729,6 +783,7 @@ function encounterOver() {
   potionButton.style.display = 'none';
   megaPotionButton.style.display = 'none';
   healAllButton.style.display = 'none';
+
   // End Game
 	if(aquarex.fainted && infernosaur.fainted && pterowind.fainted) {
 		statusMessageText.innerText += "\n\n" + "All your monsters have" +
@@ -744,6 +799,8 @@ function encounterOver() {
     playerMessageText.style.display = 'none';
     attackMessageText.style.display = 'none';
     score = 0;
+
+    enemyTypeImage.style.display = 'none'
 	}
   // Continue game
 	else {
@@ -766,6 +823,8 @@ continueButton.addEventListener('click', function(){
   enemyMessageText.style.display = 'none';
   playerMessageText.style.display = 'none';
   attackMessageText.style.display = 'none';
+
+  playerTypeImage.style.display = 'none';
 
 	storyMessageText.innerText = randomAdventure() + "\n" + randomStory() + "\nA wild " +
 								enemyMonster.monsterName + " (" + enemyMonster.monsterType + 

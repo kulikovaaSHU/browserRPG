@@ -104,6 +104,26 @@ h1 {
 	width: 400px;
 }
 
+.type-image {
+	display: inline-block;
+	width: 30px;
+}
+
+.type-image-div {
+	width: 30px;
+	height: 30px;
+	margin: auto;
+	margin-bottom: 1%;
+}
+
+#enemy-type-div {
+	margin-right: 37%;
+}
+
+#player-type-div {
+	margin-left: 37%;
+}
+
 footer {
 	margin-top: 100px;
 	color: #5e8477;
